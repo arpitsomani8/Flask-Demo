@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, render_template
 from flask import *
+
 app = Flask(__name__)
 
 
@@ -30,7 +31,7 @@ def submit():
 @app.route("/user/<name>")
 def user(name):
 
-    return f"<h1>Hello {name}! Welcome to Mars!</h1>"
+    return f"<h1>Hello {name}! Welcome to Jupiter!</h1>"
 
 
 @app.route('/results/<int:marks>')
@@ -46,8 +47,8 @@ def success(marks):
         final = 'Fail'
     else:
         final = 'Pass'
-
-    return render_template('result.html')
+    exp = {'Number:': marks, 'Result:': final}
+    return render_template('result.html', result=exp)
 
 
 @app.route("/about")

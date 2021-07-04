@@ -1,9 +1,12 @@
-<!DOCTYPE html>
 <html>
+
 <body>
     <h1>
-        Student marks {{result}}
+        {% for i,j in result.items() %}
+        {{i}}
+        {{j}}
+        {% endfor %}
     </h1>
-    <p>This form will be submitted using the POST method:</p>
 </body>
+
 </html>
