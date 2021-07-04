@@ -1,18 +1,30 @@
 from flask import Flask, redirect, url_for, render_template
-
+from flask import *
 app = Flask(__name__)
 
 
 @app.route("/")
 def goedu():
 
-    return "<h1>Hello!<h1/><br/><h2> Welcome to Jupiter!</h2>"
+    return render_template('index.html')
 
 
 @app.route("/courses")
 def course():
 
     return "<h1>FLASK BASIC TUTORIAL</h1>"
+
+
+@app.route('/submit', methods=['POST', 'GET'])
+def submit():
+    marks = 0
+    if request.method == 'POST':
+        phy = float(request.form['physics'])
+        ch = float(request.form['chemistry'])
+        maths = float(request.form['maths'])
+        total = (phy+ch+maths)/3
+    marks = total
+    return redirect(url_for('success', marks=marks))
 
 
 @app.route("/user/<name>")
@@ -34,7 +46,8 @@ def success(marks):
         final = 'Fail'
     else:
         final = 'Pass'
-    return "<h1/>Student has result<h1/>"+str(final)
+
+    return render_template('result.html')
 
 
 @app.route("/about")
